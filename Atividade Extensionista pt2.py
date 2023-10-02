@@ -13,7 +13,7 @@ def gerador(ID, Nome, XP, N):
         v2 = random.randint(1, 10)
         # Isso aqui vai garantir que não tenham contas com o resultado negativo
         while True:
-            if (v2 > v1) or (v2 == v1):
+            if (v2 == v1):
                 v2 = random.randint(1, 10)
                 continue
             else:
@@ -29,6 +29,12 @@ def gerador(ID, Nome, XP, N):
                 print("Incorreto")
 
         elif operacoes == 2:
+            while True:    
+                if (v2 > v1) or (v2 == v1):
+                    v2 = random.randint(1, 10)
+                    continue
+                else:
+                    break
             print("{} - {} = ?".format(v1, v2))
             resultado = int(input('>>>'" "))
             if resultado == (v1 - v2):
