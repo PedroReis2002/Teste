@@ -17,6 +17,9 @@ def adiciona_aluno(nome, identificacao_aluno, xp, nivel):
 # Bem como por retornar os valores do seu xp e nível de acordo com suas respostas.
 def detector_nivel(nome, nivel, xp):
     print("Boas vindas {}!" .format(nome))
+    if nivel == 1 and xp == 50:
+        nivel = boss_lv1(nome, nivel, xp)
+        return nivel
     if nivel == 1:
         xp = gerador_questoes_lv1(nome, nivel, xp)
         return xp
@@ -74,6 +77,31 @@ def gerador_questoes_lv1(nome, nivel, xp):
             else:
                 print("Incorreto")
                 continue
+
+#Boss 1
+def boss_lv1(nome, nivel, xp):
+    while True:
+        print("Marcia tem 15 laranjas, que ela vende por 0,50 R$ cada, João comprou 6 dessas laranjas.")
+        print("Quantas laranjas sobraram para Marcia?")
+        r1 = int(input(">>>"" "))
+        if r1 == 9:
+            print("Correto!")
+            print("Agora")
+            print("Quanto João pagou pelas 6 laranjas?")
+            r2 = int(input(">>>"" "))
+            if r2 == 3 or r2 == 3.00:
+                print("Correto!")
+                print("Parabéns {}, você alcançou o Nivel 2" .format(nome))
+                nivel == 2
+                return nivel
+            else: 
+                print("Incorreto")
+                break
+        else: 
+                print("Incorreto")
+                break
+
+
 
 # Gerador de questôes nivel 2
 def gerador_questoes_lv2(nome, nivel, xp):
@@ -197,8 +225,8 @@ while True:
     id_aluno = len(alunos) + 1
     print('')
     # Valores iniciais
-    nivel_aluno = 3
-    xp_aluno = 0
+    nivel_aluno = 1
+    xp_aluno = 50
     xp_aluno = detector_nivel(nomeAluno, nivel_aluno, xp_aluno)
     adiciona_aluno(nomeAluno, id_aluno, xp_aluno, nivel_aluno)
 
