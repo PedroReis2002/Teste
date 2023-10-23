@@ -1,6 +1,6 @@
 import random
 
-alunos = []
+alunos = [{'Nome': 'Ryan', 'id': 1, 'Xp': 10, 'Nivel': 1}]
 
 # Adiciona os dados do aluno dentro de um dicionário,
 # que por sua vez é acrescentado em uma lista chamada "alunos".
@@ -17,18 +17,24 @@ def adiciona_aluno(nome, identificacao_aluno, xp, nivel):
 # Bem como por retornar os valores do seu xp e nível de acordo com suas respostas.
 def detector_nivel(nome, nivel, xp):
     print("Boas vindas {}!" .format(nome))
-    if nivel == 1 and xp == 50:
-        nivel = boss_lv1(nome, nivel, xp)
-        return nivel
     if nivel == 1:
         xp = gerador_questoes_lv1(nome, nivel, xp)
-        return xp
+        if xp == 50:
+            nivel = boss_lv1(nome, nivel, xp)
+            nivel += 1
+        return xp, nivel
     elif nivel == 2:
         xp = gerador_questoes_lv2(nome, nivel, xp)
-        return xp
+        if xp == 200:
+            nivel = boss_lv2(nome, nivel, xp)
+            nivel += 1
+        return xp, nivel
     elif nivel == 3:
         xp = gerador_questoes_lv3(nome, nivel, xp)
-        return xp
+        if xp == 500:
+            nivel = boss_lv3(nome, nivel, xp)
+            nivel += 1
+        return xp, nivel
 
 def gerador_questoes_lv1(nome, nivel, xp):
     while xp < 50:
@@ -87,17 +93,17 @@ def boss_lv1(nome, nivel, xp):
         if r1 == 9:
             print("Correto!")
             print("Agora")
-            print("Quanto João pagou pelas 6 laranjas?")
+            print("Quanto João R$ pagou pelas 6 laranjas?")
             r2 = int(input(">>>"" "))
             if r2 == 3 or r2 == 3.00:
                 print("Correto!")
                 print("Parabéns {}, você alcançou o Nivel 2" .format(nome))
                 nivel == 2
                 return nivel
-            else: 
+            else:
                 print("Incorreto")
                 break
-        else: 
+        else:
                 print("Incorreto")
                 break
 
@@ -151,6 +157,35 @@ def gerador_questoes_lv2(nome, nivel, xp):
             else:
                 print("Incorreto")
                 continue
+
+# Boss 2
+def boss_lv2(nome, nivel, xp):
+    while True:
+        print("Davi tem 3 barracas de doce e cada barraca produz 20 balas por dia.")
+        print("Quantas balas são feitas por dia?")
+        r1 = int(input(">>>"" "))
+        if r1 == 60:
+            print("Correto!")
+            print("Quantas balas seriam feitas em 3 dias?")
+            r2 = int(input(">>>"" "))
+            if r2 == 180:
+                print("Correto!")
+                print("Se Davi fizesse outra barraca que também produz 20 balas todo dia, quantas seriam produzidas em 2 dias?")
+                r3 = int(input(">>>"" "))
+                if r3 == 160:
+                    print("Parabéns {}, você alcançou o Nivel 3" .format(nome))
+                    nivel += 1
+                    return nivel
+                else:
+                    print("Incorreto")
+                    break
+            else:
+                print("Incorreto")
+                break
+        else:
+                print("Incorreto")
+                break
+
 
 # Gerador de questôes nivel 3
 def gerador_questoes_lv3(nome, nivel, xp):
@@ -218,6 +253,33 @@ def gerador_questoes_lv3(nome, nivel, xp):
                 print("Incorreto")
                 continue
 
+# Boss 3
+def boss_lv3(nome, nivel, xp):
+    while True:
+        print("Marcos quer comprar parte de um terreno, o terreno é dividido em 12 partes cada parte custando R$ 180,00.")
+        print("Quantas partes Marcos pode comprar por R$ 800,00?")
+        r1 = int(input(">>>"" "))
+        if r1 == 4:
+            print("Correto!")
+            print("E quanto dinherio sobraria?")
+            r2 = int(input(">>>"" "))
+            if r2 == 80 or r2 == 80.00:
+                print("Correto!")
+                print("Se marcos quisesse comprar todo o terreno de quanto ele precisaria no minimo?")
+                r3 = int(input(">>>"" "))
+                if r3 == 2160 or r3 == 2160.00:
+                    print("Parabéns {}, você alcançou o Nivel 4" .format(nome))
+                    nivel += 1
+                    return nivel
+                else:
+                    print("Incorreto")
+                    break
+            else:
+                print("Incorreto")
+                break
+        else:
+                print("Incorreto")
+                break
 
 # Loop principal, coleta o nome do aluno e víncula a ele os dados iniciais do jogo.
 while True:
@@ -226,8 +288,8 @@ while True:
     print('')
     # Valores iniciais
     nivel_aluno = 1
-    xp_aluno = 50
-    xp_aluno = detector_nivel(nomeAluno, nivel_aluno, xp_aluno)
+    xp_aluno = 0
+    xp_aluno, nivel_aluno = detector_nivel(nomeAluno, nivel_aluno, xp_aluno)
     adiciona_aluno(nomeAluno, id_aluno, xp_aluno, nivel_aluno)
 
     # Fazendo com que os alunos fiquem ordenados dentro da lista de acordo com o seu XP (ORDEM DECRESCENTE)
